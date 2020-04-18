@@ -58,12 +58,12 @@ int do_months_per_line(int width)
 	return (width / 20);
 }
 
-void print_year(int )
+void print_year(int num_months_on_line)
 {
-	for (int m=0; m<12; m++){
-		print_month(print_width, m);
-		print_days(day_place, print_width);
-		print_dates();
+	for (int months=0; months<12; months++){
+		print_month(num_months_on_line, months);
+		print_days(day_place, num_months_on_line);
+		print_dates(num_months_on_line);
 	}
 }
 
