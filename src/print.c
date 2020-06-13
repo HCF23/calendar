@@ -99,9 +99,9 @@ void print_days(int start, int width)
 		P("\n");		
 }
 
-void print_dates(int num_months)
+void print_dates(int num_months, int m)
 {
-	for(int i=1; i<31; i++)
+	for(int i=1; i<=month[m].days; i++)
 		(i%7) ? P(" %.2d ", i) : P(" %.2d \n", i);
 
 	P("\n");
@@ -121,7 +121,7 @@ void print_year(int num_months_on_line)
 	for (int months=0; months<12; months++){
 		print_month(num_months_on_line, months);
 		print_days(day_place, num_months_on_line);
-		print_dates(num_months_on_line);
+		print_dates(num_months_on_line, months);
 	}
 }
 
