@@ -56,9 +56,7 @@ void print_month(int w, int i, int y)
 
 /*
  * print_days()
- *		for months to print on a line
- *		print days of the week
- *		starting on start day for that month
+ *		print day names of the week
  */
 void print_days(int m)
 {
@@ -67,14 +65,23 @@ void print_days(int m)
 	P("\n  --------------------------\n");		
 }
 
+/*
+ * print_dates()
+ *		print numerical dates of the month
+ * 		week by week
+ * 		starting on correct day of the week
+ */
 void print_dates(int num_months, int m)
 {
+	//sakamoto indexes from 1
 	int weekday = month[m].start_wday - 1;
 	
+	//print spaces to point at correct cords
 	if (month[m].start_wday > 1)
 		for (int i=weekday; i!=0; --i)
 			P("    ");
 	
+	//print date, if date%7==0 then \n
 	for (int i=1; i<=month[m].days; i++) {
 		((i + weekday)%7) ? P("%4.2d", i) : P("%4.2d\n", i);
 	}
@@ -93,9 +100,12 @@ void print_year(int num_months_on_line, int year_to_display)
 {
 	bool is_leap = leap_test(year_to_display);
 	
-	P("isleap(%d)\n", is_leap);
+	if (is_leap)
+		month[1].days = 29;
+	else
+		month[1].days = 28;
 	
-	for (int months=0; months<12; months++){
+	for (int months=0; months<12; months++) {
 		print_month(num_months_on_line, months, year_to_display);
 		print_days(months);
 		print_dates(num_months_on_line, months);
