@@ -14,27 +14,20 @@ Kudos (κῦδος) for routines that also transition from Julian to Gregorian c
 This task is inspired by Real Programmers Don't Use PASCAL by Ed Post, Datamation, volume 29 number 7, July 1983. 
 
 
-#/* Calendar
- *
- * 1) print 	months 		[x]
- * 		weekdays			[x]
- * 		dates				[x]
- *
- * 2) print correct date/day of week	[x]
- *
- *
- * 3) account for leap years			[x]
- * 		leap_test needs testing			[x]
- * 		account for feb 29				[x]
- *
- * 4) British Empire excluding Scotland 	JULE TO GREG 1752
- * https://en.wikipedia.org/wiki/Conversion_between_Julian_and_Gregorian_calendars
- * 
- *
- * NTH
- * 	we need a scroll function to view past and future dates
- *	some linked list starting at $current_date
- *	buffering a year either side
- *	forgetting the rest should it be viewed and not
- *
- */
+# Calendar
+ 
+  1) print 	months 		[x]
+  		weekdays			[x]
+  		dates				[x]
+ 
+  2) print correct date/day of week	[x]
+ 
+ 
+  3) account for leap years			[x]
+  		leap_test needs testing			[x]
+  		account for feb 29				[x]
+ 
+  4) British Empire excluding Scotland 	JULE TO GREG 1752
+  https://en.wikipedia.org/wiki/Conversion_between_Julian_and_Gregorian_calendars
+  
+ 
