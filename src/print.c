@@ -4,6 +4,7 @@
 #include <time.h>
 #include <stdbool.h>
 
+/*theres generic constants and functions defined here*/
 #ifndef MAIN_H
 #define MAIN_H
 	#include "../include/main.h"
@@ -13,6 +14,8 @@
 #define CAL_PRINT_H
 	#include "../include/calendar_print.h"
 #endif
+
+#include "../include/times.h"
 
 char* day[] = {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
 
@@ -79,10 +82,6 @@ int do_months_per_line(int width)
 	if ((width < MIN_WIDTH) || (width > MAX_WIDTH))
 		return (-1);
 	return (width / 20);
-}
-
-bool leap_test(int year) {
-	return (year%4 && year%100 && year%400);
 }
 
 void print_year(int num_months_on_line, int year_to_display)

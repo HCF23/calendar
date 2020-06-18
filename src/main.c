@@ -3,14 +3,17 @@
  * 1) print 	months 		[x]
  * 		weekdays	[x]
  * 		dates		[x]
- * 		
+ *
  * 2) print correct date/day of week	[]
+ *
  *
  * 3) account for leap years			[]
  * 		leap_test needs testing		[]
  * 		account for feb 29		[]
  *
- * 4) reorganise file srtucture
+ * 4) British Empire excluding Scotland 	JULE TO GREG 1752
+ * https://en.wikipedia.org/wiki/Conversion_between_Julian_and_Gregorian_calendars
+ * 
  *
  * NTH
  * 	we need a scroll function to view past and future dates
@@ -27,40 +30,51 @@
 
 #include "../include/main.h"
 #include "../include/calendar_print.h"
+#include "../include/times.h"
 
+int term_width(void);
+int months_per_line (void);
 
-int main(void)
+int main(int argc, char* argv[])
 {	
-    int print_width = WIDTH;
-	int months_per_line = do_months_per_line(print_width);
-	
-	if (months_per_line < 0) exit(1);
-	
-	int year = get_year();
+	int year;
 
-	print_year(months_per_line, year);
+	if (argc-PROGRAM_NAME > 0)
+		year = get_year();
+	else
+		year = atoi(argv[1]);
+	
+	print_year(months_per_line(), year);
 
 	return 0;
 }
 
-/*
- * init_months
- * 		gets current date
- */
-int get_year(void){
+int months_per_line (void) {
+	return do_months_per_line(term_width()) < 0 ? 1 : do_months_per_line(term_width());
+}	
+
+int term_width(void) {
+	FILE *term;
+	int width;
 	
-	time_t current;
-    struct tm * date;
-
-	time(&current);
-	date = localtime(&current);
-	P("\n%s",asctime(date));
-
-	return (1900 + date->tm_year);
-
+	term = popen("tput cols","r");
+	if (term != NULL) {
+		while (1) {
+			char *w;
+			char buf[1000];
+			w = fgets(buf, sizeof(buf), term);
+			if (w != NULL) {
+				width = atoi(w);
+				break;
+			}
+		}
+		pclose(term);
+	} else {
+		width = 80;
+	}
+	
+	return width;
 }
-
-
 /*	while(1) {	
 		
 		if (scanf("%d", &user_input) > 0) {
