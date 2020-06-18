@@ -31,15 +31,11 @@
 
 int main(void)
 {	
-	struct tm * date = {0};
-	time_t current;
- 
     int print_width = WIDTH;
 	int months_per_line = do_months_per_line(print_width);
 	
 	if (months_per_line < 0) exit(1);
 	
-//	int user_input;
 	int year = get_year();
 
 	print_year(months_per_line, year);

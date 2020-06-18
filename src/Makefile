@@ -1,35 +1,24 @@
+CC 		:= c99
+CFLAGS 	:= -Wall
+DEBUG 	:= -g
 
-CC		:= gcc
-IDIR 	:= ../include
-CCFLAGS	:= -Wall -g -I$(IDIR)
-
-ODIR	:= obj
-LDIR	:= ../lib
-
-#LIBS	:=-lm
-
-TARGET	:= cal
-SRC 	:= main print
-
-_DEPS	:= main.h calendar_print.h
-DEPS	:= $(patsubst %,$(IDIR)/%,$(_DEPS))
-
-_OBJ	:= $(addsuffic .o, $(SRC))
-OBJ		:= $(patsubst %,$(ODIR)/%,$(_OBJ))
-
-
-$(ODIR)/%.o: %.c $(DEPS)
-		$(CC) -c -o $@ $< $(CCFLAGS)
-
-
-.PHONY: clean
-
-clean:
-	rm -f $(TARGET) $(OBJ)
-
+TARGET 	:= cal
+SRC 	:= $(wildcard *.c)
+OBJ 	:= $(SRC:.c = .o)
+DEP 	:= $(OBJ:.o = .d)
+IDIR	:= ../include
+INC		:= -I$(IDIR)
 
 all: $(TARGET) $(OBJ)
 
 
 $(TARGET): $(OBJ)
-	$(CC) -o $@ $^ $(CCFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CFLAGS) $(INC)
+
+debug: $(TARGET)
+	$(CC) -o $(TARGET)_$@ $^ $(CFLAGS) $(DEBUG) $(INC)
+
+
+.PHONY: clean
+clean:
+	rm -f $(OBJ) $(TARGET) 

@@ -12,24 +12,5 @@
 #define KEYSTROKE_RIGHT 	/*(0x4D)*/ (77)
 #define KEYSTROKE_DOWN 		/*(0x50)*/ (80)
 
-char* day[] = {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
-
-struct months {
-	const char *name;
-	int days, start_wday, place;
-} month[12] = {
-		{ "January", 	31, 0, 0 },
-		{ "February", 	28, 0, 0 },
-		{ "March", 	31, 0, 0 },
-		{ "April", 	30, 0, 0 },
-		{ "May", 	31, 0, 0 },
-		{ "June", 	30, 0, 0 },
-		{ "July", 	31, 0, 0 },
-		{ "August", 	31, 0, 0 },
-		{ "September", 	30, 0, 0 },
-		{ "October", 	31, 0, 0 },
-		{ "November", 	30, 0, 0 },
-		{ "December", 	31, 0, 0 }
-};
 
 int get_year(void);

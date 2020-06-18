@@ -1,4 +1,4 @@
-
+#include <stdbool.h>
 
 void space(int n);
 void print_month(int w, int i);
