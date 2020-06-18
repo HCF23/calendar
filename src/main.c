@@ -33,13 +33,13 @@
 #include "../include/times.h"
 
 int term_width(void);
-int months_per_line (void);
+int months_per_line(void);
 
 int main(int argc, char* argv[])
 {	
 	int year;
-
-	if (argc-PROGRAM_NAME > 0)
+	
+	if (argv[1] == NULL)
 		year = get_year();
 	else
 		year = atoi(argv[1]);
@@ -50,7 +50,8 @@ int main(int argc, char* argv[])
 }
 
 int months_per_line (void) {
-	return do_months_per_line(term_width()) < 0 ? 1 : do_months_per_line(term_width());
+	return (do_months_per_line(term_width()) < 0)
+	? 1 : do_months_per_line(term_width());
 }	
 
 int term_width(void) {
@@ -75,6 +76,7 @@ int term_width(void) {
 	
 	return width;
 }
+
 /*	while(1) {	
 		
 		if (scanf("%d", &user_input) > 0) {
