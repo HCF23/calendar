@@ -21,4 +21,4 @@ debug: $(TARGET)
 
 .PHONY: clean
 clean:
-	rm $(wildcard *.o) $(wildcard *.exe)
+	rm -f $(wildcard *.o) $(wildcard *.exe*)
