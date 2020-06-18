@@ -1,8 +1,8 @@
-CC 		:= c99
+CC 		:= gcc
 CFLAGS 	:= -Wall
-DEBUG 	:= -g
+DEBUG 	:= -g -nostdlib
 
-TARGET 	:= cal
+TARGET 	:= my_cal
 SRC 	:= $(wildcard *.c)
 OBJ 	:= $(SRC:.c = .o)
 DEP 	:= $(OBJ:.o = .d)
@@ -21,4 +21,4 @@ debug: $(TARGET)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJ) $(TARGET) 
+	rm $(wildcard *.o) $(wildcard *.exe)
