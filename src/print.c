@@ -24,17 +24,17 @@ struct months {
 	int days, start_wday, place;
 } month[12] = {
 		{ "January", 	31, 0, 0 },
-		{ "February", 	28, 0, 0 },
-		{ "March", 	31, 0, 0 },
-		{ "April", 	30, 0, 0 },
-		{ "May", 	31, 0, 0 },
-		{ "June", 	30, 0, 0 },
-		{ "July", 	31, 0, 0 },
-		{ "August", 	31, 0, 0 },
-		{ "September", 	30, 0, 0 },
-		{ "October", 	31, 0, 0 },
-		{ "November", 	30, 0, 0 },
-		{ "December", 	31, 0, 0 }
+		{ "February", 	28, 0, 1 },
+		{ "March", 	31, 0, 2 },
+		{ "April", 	30, 0, 3 },
+		{ "May", 	31, 0, 4 },
+		{ "June", 	30, 0, 5 },
+		{ "July", 	31, 0, 6 },
+		{ "August", 	31, 0, 7 },
+		{ "September", 	30, 0, 8 },
+		{ "October", 	31, 0, 9 },
+		{ "November", 	30, 0, 10 },
+		{ "December", 	31, 0, 11 }
 };
 
 /*
@@ -47,10 +47,11 @@ void space(int n) { while(n-- > 0) putchar(' '); }
  * print_month()
  *		prints all month names on a line
  */
-void print_month(int w, int i)
+void print_month(int w, int i, int y)
 {
 	space((w / 2));
 	P("\t%s\n", month[i].name);
+	month[i].start_wday = sakamoto_day_of_the_week(y,i);
 }
 
 /*
@@ -61,18 +62,22 @@ void print_month(int w, int i)
  */
 void print_days(int m)
 {
-	int start = month[m].start_wday;
-
-	for (int n=start; n<(DAY_MEM_SIZE*7); n+=DAY_MEM_SIZE)
+	for (int n=0; n<(DAY_MEM_SIZE*7); n+=DAY_MEM_SIZE)
 		P("%4s", *(day)+n);
 	P("\n  --------------------------\n");		
 }
 
 void print_dates(int num_months, int m)
 {
-	for(int i=1; i<=month[m].days; i++)
-		(i%7) ? P("%4.2d", i) : P("%4.2d\n", i);
-
+	int weekday = month[m].start_wday - 1;
+	
+	if (month[m].start_wday > 1)
+		for (int i=weekday; i!=0; --i)
+			P("    ");
+	
+	for (int i=1; i<=month[m].days; i++) {
+		((i + weekday)%7) ? P("%4.2d", i) : P("%4.2d\n", i);
+	}
 	P("\n\n\n");
 
 }
@@ -91,7 +96,7 @@ void print_year(int num_months_on_line, int year_to_display)
 	P("isleap(%d)\n", is_leap);
 	
 	for (int months=0; months<12; months++){
-		print_month(num_months_on_line, months);
+		print_month(num_months_on_line, months, year_to_display);
 		print_days(months);
 		print_dates(num_months_on_line, months);
 	}
