@@ -1,5 +1,19 @@
 CC 		:= gcc
 CFLAGS 	:= -Wall -Wextra -Werror -Wconversion
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CCEXTRAFLAGS 		:= -Wformat=2 -Wformat-truncation=2 -Wshadow -Wdouble-promotion -pedantic-errors -Wundef
+CCNO_TENTATIVE_VARIABLES_IE_VARIABLES_FORCED_SHARE_MEM := -fno-common 
+CCtldr			    := $(CCNO_TENTATIVE_VARIABLES_IE_VARIABLES_FORCED_SHARE_MEM) 
+CC_FIX_ENUM_WIDTH	:= -fno-short-enums
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CCFLAGSX  := $(CFLAGS) $(CCEXTRAFLAGS)
+CCXTRA   := $(CFLAGS) $(CCEXTRAFLAGS) $(CCtldr) $(CC_FIX_ENUM_WIDTH)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 DEBUG 	:= -g -nostdlib
 
 TARGET 	:= my_cal
@@ -13,7 +27,7 @@ all: $(TARGET) $(OBJ)
 
 
 $(TARGET): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(INC)
+	$(CC) -o $@ $^ $(CCXTRA) $(INC)
 
 debug: $(TARGET)
 	$(CC) -o $(TARGET)_$@ $^ $(CFLAGS) $(DEBUG) $(INC)
