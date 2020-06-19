@@ -58,7 +58,7 @@ void print_month(int w, int i, int y)
  * print_days()
  *		print day names of the week
  */
-void print_days(int m)
+void print_days(void)
 {
 	for (int n=0; n<(DAY_MEM_SIZE*7); n+=DAY_MEM_SIZE)
 		P("%4s", *(day)+n);
@@ -71,7 +71,7 @@ void print_days(int m)
  * 		week by week
  * 		starting on correct day of the week
  */
-void print_dates(int num_months, int m)
+void print_dates(int m)
 {
 	//sakamoto indexes from 1
 	int weekday = month[m].start_wday - 1;
@@ -107,8 +107,8 @@ void print_year(int num_months_on_line, int year_to_display)
 	
 	for (int months=0; months<12; months++) {
 		print_month(num_months_on_line, months, year_to_display);
-		print_days(months);
-		print_dates(num_months_on_line, months);
+		print_days();
+		print_dates(months);
 	}
 }
 

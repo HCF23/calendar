@@ -15,6 +15,10 @@ int main(int argc, char* argv[])
 {	
 	int year;
 	
+    if (!(argc)) {
+        exit(1);
+    }
+    
 	if (argv[1] == NULL)
 		year = get_year();
 	else
