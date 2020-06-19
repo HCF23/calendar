@@ -46,6 +46,8 @@ void space(int n) { while(n-- > 0) putchar(' '); }
 /*
  * print_month()
  *		prints all month names on a line
+ *      sakamoto's algorithm is used to determine which day
+ *          a date falls on
  */
 void print_month(int w, int i, int y)
 {
@@ -61,29 +63,33 @@ void print_month(int w, int i, int y)
 void print_days(void)
 {
 	for (int n=0; n<(DAY_MEM_SIZE*7); n+=DAY_MEM_SIZE)
-		P("%4s", *(day)+n);
-	P("\n  --------------------------\n");		
+		P("%3s", *(day)+n);
+	P("\n --------------------\n");		
 }
 
 /*
  * print_dates()
  *		print numerical dates of the month
- * 		week by week
+ * 		week per line
  * 		starting on correct day of the week
  */
 void print_dates(int m)
 {
 	//sakamoto indexes from 1
-	int weekday = month[m].start_wday - 1;
-	
+	int weekday = month[m].start_wday;
+	if (weekday == 0) 
+        weekday = 7;
 	//print spaces to point at correct cords
-	if (month[m].start_wday > 1)
-		for (int i=weekday; i!=0; --i)
-			P("    ");
-	
+	//if (month[m].start_wday > 0)
+    
+    for (int i=weekday; i>1; --i)
+        P("   ");
+
 	//print date, if date%7==0 then \n
 	for (int i=1; i<=month[m].days; i++) {
-		((i + weekday)%7) ? P("%4.2d", i) : P("%4.2d\n", i);
+        ((i + weekday-1) % 7)
+            ? P("%3.2d", i) : P("%3.2d\n", i);
+            
 	}
 	P("\n\n\n");
 
