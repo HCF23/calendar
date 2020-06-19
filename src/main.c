@@ -15,9 +15,8 @@ int main(int argc, char* argv[])
 {	
 	int year;
 	
-    if (!(argc)) {
+    if (!(argc))
         exit(1);
-    }
     
 	if (argv[1] == NULL)
 		year = get_year();
@@ -57,24 +56,4 @@ int term_width(void) {
 	return width;
 }
 
-/*	while(1) {	
-		
-		if (scanf("%d", &user_input) > 0) {
-			P("\n\n\tYou Entered: %d\n\n", user_input);
-			
-			switch (user_input) {
-				case 'y': scanf("%d", &year); break;
-				case KEYSTROKE_UP:      
-				case KEYSTROKE_LEFT: year--; break;     
-				case KEYSTROKE_DOWN:			     
-				case KEYSTROKE_RIGHT: year++; break;
-				       
-			}
-
-
-			print_year(months_per_line, year);
-			P("Scroll with arrow keys or press 'y' to enter a year\n\n");
-		}
-	}
-*/
 
