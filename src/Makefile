@@ -1,5 +1,5 @@
 CC 		:= gcc
-CFLAGS 	:= -Wall
+CFLAGS 	:= -Wall -Wextra -Werror -Wconversion
 DEBUG 	:= -g -nostdlib
 
 TARGET 	:= my_cal
